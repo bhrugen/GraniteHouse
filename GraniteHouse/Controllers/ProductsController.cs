@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using GraniteHouse.Data;
 using GraniteHouse.Models.ViewModel;
+using GraniteHouse.Utility;
 using Microsoft.AspNetCore.Hosting.Internal;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -62,6 +64,32 @@ namespace GraniteHouse.Controllers
             //Image being saved
 
             string webRootPath = _hostingEnvironment.WebRootPath;
+            var files = HttpContext.Request.Form.Files;
+
+            var productsFromDb = _db.Products.Find(ProductsVM.Products.Id);
+
+            if(files.Count!=0)
+            {
+                //Image has been uploaded
+                var uploads = Path.Combine(webRootPath, SD.ImageFolder);
+                var extension = Path.GetExtension(files[0].FileName);
+
+                using (var filestream = new FileStream(Path.Combine(uploads, ProductsVM.Products.Id + extension), FileMode.Create))
+                {
+                    files[0].CopyTo(filestream);
+                }
+                productsFromDb.Image = @"\" + SD.ImageFolder + @"\" + ProductsVM.Products.Id + extension;
+            }
+            else
+            {
+                //when user does not upload image
+                var uploads = Path.Combine(webRootPath, SD.ImageFolder + @"\" + SD.DefaultProductImage);
+                System.IO.File.Copy(uploads, webRootPath + @"\" + SD.ImageFolder + @"\" + ProductsVM.Products.Id + ".png");
+                productsFromDb.Image = @"\" + SD.ImageFolder + @"\" + ProductsVM.Products.Id + ".png";
+            }
+            await _db.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
 
         }
     }
