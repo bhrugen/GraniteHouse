@@ -1,4 +1,5 @@
 ﻿@model GraniteHouse.Models.ViewModel.ProductsViewModel
+@using GraniteHouse.Extensions
 
 @{
     ViewData["Title"] = "Create";
@@ -41,7 +42,7 @@
                 <label asp-for="ProductTypes"></label>
             </div>
             <div class="col-5">
-
+                <select asp-for="@Model.Products.ProductTypeId" asp-items="Model.ProductTypes.ToSelectListItem(Model.Products.ProductTypeId)" class="form-control"></select>
             </div>
         </div>
         <div class="form-group row">
@@ -49,7 +50,7 @@
                 <label asp-for="SpecialTags"></label>
             </div>
             <div class="col-5">
-
+                <select asp-for="@Model.Products.SpecialTagsID" asp-items="Model.SpecialTags.ToSelectListItem(Model.Products.SpecialTagsID)" class="form-control"></select>
             </div>
         </div>
         <div class="form-group row">
