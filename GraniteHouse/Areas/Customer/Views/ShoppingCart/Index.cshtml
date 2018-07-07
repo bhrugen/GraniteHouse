@@ -91,6 +91,9 @@
                         <div class="col-12" style="padding-bottom:15px">
                             <input asp-for="@Model.Appointments.AppointmentTime" value="" type="text" class="timepicker form-control" />
                         </div>
+                        <div class="col-12">
+                            <button type="submit" id="btnPlaceOrder" class="btn btn-success">Schedule Appointment</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -104,3 +107,23 @@
     }
 </form>
 
+@section Scripts{ 
+    <script>
+        $('.timepicker').timepicker({
+            timeFormat: 'h:mm p',
+            interval: 30,
+            minTime: '10',
+            maxTime: '3:00pm',
+            startTime: '10:00',
+            dynamic: true,
+            dropdown: true,
+            scrollbar: true
+        });
+
+        $(function () {
+            $("#datepicker").datepicker({
+                minDate: +1, maxDate: "+3M"
+            });
+        });
+    </script>
+}
