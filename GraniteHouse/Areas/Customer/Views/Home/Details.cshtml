@@ -76,13 +76,9 @@
 
         <br />
         <div class="form-group">
-            
+            <input hidden asp-for="Id" />
             <a asp-action="Index" class="btn btn-success">Back to List</a>
         </div>
     </div>
 </form>
-
-@section Scripts{
-    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
 
