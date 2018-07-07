@@ -9,20 +9,20 @@
     <tr class="table-info">
         <th style="text-align:center; width:20%"></th>
         <th style="text-align:center;">
-            <label asp-for="@Model.Products.FirstOrDefault().Name"></label>
+            <label asp-for="@Model.FirstOrDefault().Name"></label>
         </th>
         <th style="text-align:center;">
-            <label asp-for="@Model.Products.FirstOrDefault().Price"></label>
+            <label asp-for="@Model.FirstOrDefault().Price"></label>
         </th>
         <th style="text-align:center;">
-            <label asp-for="@Model.Products.FirstOrDefault().ShadeColor"></label>
+            <label asp-for="@Model.FirstOrDefault().ShadeColor"></label>
         </th>
         <th style="text-align:center;">
-            <label asp-for="@Model.Products.FirstOrDefault().ProductTypes.Name"></label>
+            <label asp-for="@Model.FirstOrDefault().ProductTypes.Name"></label>
         </th>
         <th style="text-align:center;"></th>
     </tr>
-    @foreach (var item in Model.Products)
+    @foreach (var item in Model)
     {
         <tr style="padding:50px;">
             <td>
