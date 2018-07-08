@@ -7,6 +7,61 @@
 
     <div style="height:150px; background-color:aliceblue" class="container">
         @* We will add search criteria *@
+        <div class="col-12">
+            <div class="row" style="padding-top:10px;">
+                <div class="col-2">
+                    Customer Name
+                </div>
+                <div class="col-3">
+                    @Html.Editor("searchName", new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+                <div class="col-2">
+
+                </div>
+                <div class="col-2">
+                    Email
+                </div>
+                <div class="col-3">
+                    @Html.Editor("searchEmail", new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+
+            </div>
+            <div class="row" style="padding-top:10px;">
+                <div class="col-2">
+                    Phone Number
+                </div>
+                <div class="col-3">
+                    @Html.Editor("searchPhone", new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+                <div class="col-2">
+
+                </div>
+                <div class="col-2">
+                    Appointment Date
+                </div>
+                <div class="col-3">
+                    @Html.Editor("searchDate", new { htmlAttributes = new { @class = "form-control",@id="datepicker" } })
+                </div>
+
+            </div>
+            <div class="row" style="padding-top:10px;">
+                <div class="col-2">
+                </div>
+                <div class="col-3">
+                </div>
+                <div class="col-2">
+
+                </div>
+                <div class="col-2">
+                </div>
+                <div class="col-3">
+                    <button type="submit" name="submit" value="Search" class="btn btn-primary form-control">
+                        <i class="fas fa-search"></i> Search
+                    </button>
+                </div>
+
+            </div>
+        </div>
     </div>
 
     <br /><br />
