@@ -37,7 +37,7 @@
                     <label asp-for="Appointment.AppointmentDate"></label>
                 </div>
                 <div class="col-8">
-                    <input asp-for="Appointment.AppointmentDate" class="form-control" />
+                    <input asp-for="Appointment.AppointmentDate" id="datepicker" type="text" class="form-control" />
                 </div>
                 <span asp-validation-for="Appointment.AppointmentDate" class="text-danger"></span>
             </div>
@@ -46,7 +46,7 @@
                     <label asp-for="Appointment.AppointmentTime"></label>
                 </div>
                 <div class="col-8">
-                    <input asp-for="Appointment.AppointmentTime" class="form-control" />
+                    <input asp-for="Appointment.AppointmentTime" id="timepicker" type="text" class="timepicker form-control" />
                 </div>
                 <span asp-validation-for="Appointment.AppointmentTime" class="text-danger"></span>
             </div>
@@ -64,7 +64,7 @@
                     <label asp-for="Appointment.SalesPerson"></label>
                 </div>
                 <div class="col-8">
-                    @if(User.IsInRole(SD.AdminEndUser))
+                    @if (User.IsInRole(SD.AdminEndUser))
                     {
                         <input asp-for="@Model.Appointment.SalesPerson.Name" readonly class="form-control" />
                         <input asp-for="@Model.Appointment.SalesPersonId" hidden />
@@ -76,7 +76,7 @@
 
                     }
                 </div>
-                
+
             </div>
             <div class="form-group row">
                 <div class="col-4">
@@ -90,8 +90,9 @@
         </div>
         <div class="col-6">
             @* Partial View *@
+            <partial name="~/Views/Shared/_AppointmentProductDetails.cshtml" model="Model.Products" />
         </div>
-       
+
 
 
         <br />
@@ -102,7 +103,50 @@
     </div>
 </form>
 
+
 @section Scripts{
     @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
 
+    <script>
+        $('.timepicker').timepicker({
+            timeFormat: 'h:mm p',
+            interval: 30,
+            minTime: '10',
+            maxTime: '3:00pm',
+            startTime: '10:00',
+            dynamic: true,
+            dropdown: true,
+            scrollbar: true
+        });
+
+        $(function () {
+            $("#datepicker").datepicker({
+                minDate: +1, maxDate: "+3M"
+            });
+        });
+
+        $(document).ready(function () {
+            var appointmentTime = document.getElementById('datepicker').value;
+            var splitData = "";
+            if (appointmentTime.indexOf(" ") > 0) {
+                splitData = appointmentTime.split(" ");
+
+            }
+            else {
+                splitData = appointmentTime.split("T");
+
+            }
+
+            var time = splitData[1].substring(0, 5);
+            if (time.slice(-1) == ":") {
+                time = time.substring(0, time.length - 1);
+
+            }
+            var amPmTime = splitData[2];
+            $('#datepicker').attr('value', splitData[0]);
+            $('#timepicker').attr('value', time + ' ' + amPmTime);
+
+        });
+
+    </script>
+}
