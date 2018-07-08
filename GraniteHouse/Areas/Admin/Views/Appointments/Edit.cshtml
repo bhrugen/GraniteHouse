@@ -1,0 +1,98 @@
+﻿@model GraniteHouse.Models.ViewModel.AppointmentDetailsViewModel
+@using GraniteHouse.Extensions
+@using GraniteHouse.Utility
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<br />
+<h2 class="text-info">Edit Appointment</h2>
+
+<form method="post" enctype="multipart/form-data">
+    <div class="p-4 border rounded row">
+        <input hidden asp-for="Appointment.Id" />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="col-6">
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Appointment.CustomerName"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Appointment.CustomerName" class="form-control" />
+                </div>
+                <span asp-validation-for="Appointment.CustomerName" class="text-danger"></span>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Appointment.CustomerEmail"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Appointment.CustomerEmail" class="form-control" />
+                </div>
+                <span asp-validation-for="Appointment.CustomerEmail" class="text-danger"></span>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Appointment.AppointmentDate"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Appointment.AppointmentDate" class="form-control" />
+                </div>
+                <span asp-validation-for="Appointment.AppointmentDate" class="text-danger"></span>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Appointment.AppointmentTime"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Appointment.AppointmentTime" class="form-control" />
+                </div>
+                <span asp-validation-for="Appointment.AppointmentTime" class="text-danger"></span>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Appointment.CustomerPhoneNumber"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Appointment.CustomerPhoneNumber" class="form-control" />
+                </div>
+                <span asp-validation-for="Appointment.CustomerPhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Appointment.SalesPerson"></label>
+                </div>
+                <div class="col-8">
+                    
+                </div>
+                
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Appointment.isConfirmed"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Appointment.isConfirmed" class="form-control" />
+                </div>
+            </div>
+
+        </div>
+        <div class="col-6">
+            @* Partial View *@
+        </div>
+       
+
+
+        <br />
+        <div class="form-group">
+            <input type="submit" class="btn btn-primary" value="Update" />
+            <a asp-action="Index" class="btn btn-success">Back to List</a>
+        </div>
+    </div>
+</form>
+
+@section Scripts{
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
