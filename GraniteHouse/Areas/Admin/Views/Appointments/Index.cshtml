@@ -40,7 +40,7 @@
                     Appointment Date
                 </div>
                 <div class="col-3">
-                    @Html.Editor("searchDate", new { htmlAttributes = new { @class = "form-control",@id="datepicker" } })
+                    @Html.Editor("searchDate", new { htmlAttributes = new { @class = "form-control", @id = "datepicker" } })
                 </div>
 
             </div>
@@ -91,34 +91,45 @@
                 </th>
                 <th></th>
             </tr>
-            @foreach(var item in Model.Appointments)
+            @foreach (var item in Model.Appointments)
             {
-            <tr>
-                <td>
-                    @Html.DisplayFor(m => item.SalesPerson.Name)
-                </td>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(m => item.SalesPerson.Name)
+                    </td>
 
-                <td>
-                    @Html.DisplayFor(m => item.AppointmentDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(m => item.CustomerName)
-                </td>
-                <td>
-                    @Html.DisplayFor(m => item.CustomerPhoneNumber)
-                </td>
-                <td>
-                    @Html.DisplayFor(m => item.CustomerEmail)
-                </td>
-                <td>
-                    @Html.DisplayFor(m => item.isConfirmed)
-                </td>
-                <td>
-                    <partial name="_TableButtonPartial" model="item.Id" />
-                </td>
-            </tr>
+                    <td>
+                        @Html.DisplayFor(m => item.AppointmentDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => item.CustomerName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => item.CustomerPhoneNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => item.CustomerEmail)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => item.isConfirmed)
+                    </td>
+                    <td>
+                        <partial name="_TableButtonPartial" model="item.Id" />
+                    </td>
+                </tr>
 
             }
         </table>
     </div>
 </form>
+
+@section Scripts{
+    <script>
+      
+        $(function () {
+            $("#datepicker").datepicker({
+                minDate: +1, maxDate: "+3M"
+            });
+        });
+    </script>
+}
