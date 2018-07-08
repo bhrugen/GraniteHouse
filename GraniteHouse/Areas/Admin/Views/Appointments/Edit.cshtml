@@ -64,7 +64,17 @@
                     <label asp-for="Appointment.SalesPerson"></label>
                 </div>
                 <div class="col-8">
-                    
+                    @if(User.IsInRole(SD.AdminEndUser))
+                    {
+                        <input asp-for="@Model.Appointment.SalesPerson.Name" readonly class="form-control" />
+                        <input asp-for="@Model.Appointment.SalesPersonId" hidden />
+
+                    }
+                    else
+                    {
+                        <select asp-for="@Model.Appointment.SalesPersonId" asp-items="Model.SalesPerson.ToSelectListItemString(Model.Appointment.SalesPersonId)" class="form-control"></select>
+
+                    }
                 </div>
                 
             </div>
