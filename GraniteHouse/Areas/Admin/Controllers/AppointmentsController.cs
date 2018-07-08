@@ -134,5 +134,32 @@ namespace GraniteHouse.Areas.Admin.Controllers
         }
 
 
+        //GET Detials
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var productList = (IEnumerable<Products>)(from p in _db.Products
+                                                      join a in _db.ProductsSelectedForAppointment
+                                                      on p.Id equals a.ProductId
+                                                      where a.AppointmentId == id
+                                                      select p).Include("ProductTypes");
+
+            AppointmentDetailsViewModel objAppointmentVM = new AppointmentDetailsViewModel()
+            {
+                Appointment = _db.Appointments.Include(a => a.SalesPerson).Where(a => a.Id == id).FirstOrDefault(),
+                SalesPerson = _db.ApplicationUser.ToList(),
+                Products = productList.ToList()
+            };
+
+            return View(objAppointmentVM);
+
+        }
+
+
+
     }
 }
