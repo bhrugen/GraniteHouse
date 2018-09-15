@@ -15,6 +15,7 @@ using Microsoft.EntityFrameworkCore;
 namespace GraniteHouse.Controllers
 {
     [Authorize(Roles = SD.SuperAdminEndUser)]
+
     [Area("Admin")]
     public class ProductsController : Controller
     {
@@ -129,7 +130,7 @@ namespace GraniteHouse.Controllers
 
                 var productFromDb = _db.Products.Where(m => m.Id == ProductsVM.Products.Id).FirstOrDefault();
 
-                if(files[0].Length>0 && files[0]!=null)
+                if(files.Count>0 && files[0]!=null)
                 {
                     //if user uploads a new image
                     var uploads = Path.Combine(webRootPath, SD.ImageFolder);

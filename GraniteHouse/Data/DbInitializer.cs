@@ -24,7 +24,10 @@ namespace GraniteHouse.Data
 
         public async void Initialize()
         {
-            _db.Database.Migrate();
+            if (_db.Database.GetPendingMigrations().Count() > 0)
+            {
+                _db.Database.Migrate();
+            }
 
             if (_db.Roles.Any(r => r.Name == SD.SuperAdminEndUser)) return;
 
@@ -39,7 +42,9 @@ namespace GraniteHouse.Data
                 EmailConfirmed = true
             }, "Admin123*").GetAwaiter().GetResult();
 
-            await _userManager.AddToRoleAsync(await _userManager.FindByEmailAsync("admin@gmail.com"), SD.SuperAdminEndUser);
+            IdentityUser user = await _db.Users.Where(u => u.Email == "admin@gmail.com").FirstOrDefaultAsync();
+
+            await _userManager.AddToRoleAsync(user, SD.SuperAdminEndUser);
         }
             
 
